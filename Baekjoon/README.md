@@ -35,3 +35,14 @@ It applies 'str' to each element and then join them
 from itertools import permutations  
 permutations(iteratable, 3) --> it returns an iteratable object. You'll have to change it to a list. Each element will be a tuple. ex) ('A', 'B', 'C')  
 ** It wouldn't be proper to use when you have to deal with a big number of cards (Space complexity)
+
+### 1946
+- lambda  
+lambda variable: return --> Lambda expression itself returns a function object. You need to assign it to a variable 
+ex) a = lambda x:x + 10  
+** https://dojang.io/mod/page/view.php?id=2359
+
+- you can't assign list.sort() to a variable
+
+### 1339
+- 알고리즘 문제 한정, 경우의 수를 다양한 조건문을 통해서 작성해야 하는 경우, 되게 간단한 방법이 존재하거나, Brute-Force해야하는 경우가 존재한다.
