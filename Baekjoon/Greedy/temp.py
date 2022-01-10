@@ -1,4 +1,9 @@
-a = [1,2,3,4,5]
-result = a.pop() + a.pop()
-print(result)
-print(a)
+import sys
+
+input = sys.stdin.readline
+b = []
+for i in range(3):
+  a = int(input())
+  b.append(a)
+
+print(b)

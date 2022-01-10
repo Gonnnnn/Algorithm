@@ -16,7 +16,9 @@ for i in range(number, -1, -1):
 ### 1931
 - readline  
 import sys / input = sys.stdin.readline / variable = int(input())  
-faster than normal 'intput()'
+faster than normal 'intput()'  
+****** readline으로 읽어올 때, 제일 마지막에 개행문자 '\n'이 붙는다. 이는 input().split()으로 없앨 수 있다.  
+int(input())을 했을 때 자동으로 사라지며, input().split()을 했을 때도 자동으로 떨어져 나간다.
 
 ### 10162
 - "".join  
@@ -46,3 +48,6 @@ ex) a = lambda x:x + 10
 
 ### 1339
 - 알고리즘 문제 한정, 경우의 수를 다양한 조건문을 통해서 작성해야 하는 경우, 되게 간단한 방법이 존재하거나, Brute-Force해야하는 경우가 존재한다.
+
+### 4796
+- 간단한 계산이더라도, 범위 등을 손으로 그려보고, 표현해보며 검증하자. 매우 간단한 문제였지만, 중간에 더해지는 값이 문제에서 제시되는 L을 넘으면 안되는게 당연한데, 그 부분을 생각치 못했다.
