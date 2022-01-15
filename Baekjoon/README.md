@@ -3,7 +3,7 @@
 10610__30 1946__신입사원(greedy에 대해 이해하기에 좋은 문제. 다만 내가 푼 풀이(1)은 왜 틀렸는지 모르겠다. 생각해봐야할 것이다.)
 
 ## A little tricky
-1931_회의실배정 
+1931_회의실배정 1080_배열(논리는 맞았지만 구현하는데 있어서 오류가 많았던 문제)
 
 ## It could be better
 1541_잃어버린괄호 16953_AtoB 1439_뒤집기
@@ -63,3 +63,8 @@ ex) a = lambda x:x + 10
 
 #### 2864
 - variable = str.replace('a word i want to change to ABCD', 'ABCD')
+
+#### 1080
+- a = [list(map(int, input().strip())) for _ in range(n)]  
+- a[n-2:n][:m] != b[n-2:n][:m]  
+arrays can be compared through != and ==

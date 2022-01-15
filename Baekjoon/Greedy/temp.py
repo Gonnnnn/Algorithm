@@ -1,9 +1,6 @@
-import sys
+a = 1
+b = [[1]]
+for i in range(a-2, a):
+  print(b[i][0])
 
-input = sys.stdin.readline
-b = []
-for i in range(3):
-  a = int(input())
-  b.append(a)
-
-print(b)
+b[-1][0]

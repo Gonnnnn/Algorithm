@@ -11,56 +11,39 @@
 
 import sys
 
-
 n, m = map(int, input().split())
 
-a = []
-for _ in range(n):
-  a.append(list(map(int, input().strip())))
+a = [list(map(int, input().strip())) for _ in range(n)]
 
-b = []
-for _ in range(n):
-  b.append(list(map(int, input().strip())))
+b = [list(map(int, input().strip())) for _ in range(n)]
 
+def check(array1, array2, x, y):
+  for k in range(2):
+    if((array1[y][x+k] == array2[y][x+k]) ^ (array1[y][x+1+k] == array2[y][x+1+k])):
+      return False
+  return True
 
-if((n < 3) or (m < 3)):
-  print(-1)
-else:
-  count = 0
-  possible = True
-  for j in range(1, n - 1):
-    
-    if(not possible):
-      break
+def change(array1, array2, x, y):
+  for p in range(3):
+        for q in range(3):
+            a[y+p][x+q] = 1 - a[y+p][x+q]
 
-    for i in range(1, m - 1):
-      if(i == m - 2):
-        for k in range(2):
-          if((a[j-1][i-1+k] == b[j-1][i-1+k]) ^ (a[j-1][i-1+k] == b[j-1][i-1+k])):
-            possible = False
-            
-      if(a[j-1][i-1] != b[j-1][i-1]):
-        count += 1
-        for l in range(3):
-          for m in range(3):
-            if(a[j-1+l][i-1+m] == 1):
-              a[j-1+l][i-1+m] = 0
-            else:
-              a[j-1+l][i-1+m] = 1
-
+count = 0
+possible = True
+for j in range(0, n - 2):
 
   if(not possible):
-    print(-1)
-  else:
-    no_answer = False
-    for j in range(2):
-      if(no_answer):
-        break
-      for i in range(m-1):
-        if(a[j][i] != b[j][i]):
-          no_answer == True
-          break
-    if(no_answer):
-      print(-1)
-    else:
-      print(count)
+    break
+  
+  for i in range(0, m - 2):
+    if(i == m - 3):
+      possible = check(a, b, i, j)
+    
+    if(a[j][i] != b[j][i]):
+      count += 1
+      change(a, b, i, j)
+
+if(not possible or (a[n-2:n][:m] != b[n-2:n][:m])):
+  print(-1)
+else:
+  print(count)
