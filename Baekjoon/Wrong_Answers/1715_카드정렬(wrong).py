@@ -12,6 +12,7 @@
 # 첫째 줄에 최소 비교 횟수를 출력한다.
 
 import sys
+import heapq
 
 input = sys.stdin.readline
 num = int(input())
@@ -19,13 +20,11 @@ cards = []
 for i in range(num):
   cards.append(int(input()))
 
-cards.sort(reverse=True)
 result = 0
-temp1 = 0
-temp2 = 0
-while(len(cards) > 1):
-  
-  sum = cards.pop() + cards.pop()
-  result += sum
+heapq.heapify(cards)
+while(len(cards) >= 2):
+  temp = heapq.heappop(cards) + heapq.heappop(cards)
+  result += temp
+  heapq.heappush(cards, temp)
 
 print(result)
