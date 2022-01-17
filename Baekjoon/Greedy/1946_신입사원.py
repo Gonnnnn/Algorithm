@@ -15,36 +15,72 @@ import sys
 input = sys.stdin.readline
 
 num = int(input())
-result = []
-
+cases = []
 for i in range(num):
-  case = []
-  first = 0
-  second = 0
+  each_case = []
   num_of_ppl = int(input())
-  count = 0
   for j in range(num_of_ppl):
-    person = list(map(int, input().split()))
-    case.append(person)
-    if(person[0] == 1):
-      first = person[1]
-    if(person[1] == 1):
-      second = person[0]
+    each_case.append(list(map(int, input().split())))
+  cases.append(each_case)
 
-  case.sort(key=lambda x:x[1])
-  case = case[:first]
-
-  case.sort(reverse = True)
-  for k in range(len(case)):
-    if(case[k][0] == second):
-      break
-    count += 1
-  
-  result.append(len(case) - count)
-
-for i in range(len(result)):
-  print(result[i])
+for case in cases:
+  count = 1
+  case.sort()
+  standard = case[0][1]
+  for person in case:
+    if(person[1] < standard):
+      count += 1
+      standard = person[1]
+  print(count)
+    
 
 
-#case = [[[1, 2], [3, 4]], [[1, 2], [3, 4]]]
 
+
+
+
+#################
+# better answer below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import sys
+# input = sys.stdin.readline
+# t = int(input())
+# for i in range(t):
+#     n = int(input())
+#     d = []
+#     for j in range(n):
+#         d.append(0)
+#     for j in range(n):
+#         a, b = map(int, input().split())
+#         d[a - 1] = b
+#     min = d[0]
+#     cnt = 1
+#     for j in range(n):
+#         if d[j] < min:
+#             min = d[j]
+#             cnt += 1
+#     print(cnt)

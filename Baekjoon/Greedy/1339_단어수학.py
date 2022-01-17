@@ -22,27 +22,23 @@ words = []
 
 for i in range(num):
   a = input()
-  length = len(a) -1
-  words.append([length, a[:-1]])
-words.sort(reverse=True)
-words.append([0,''])
+  words.append(a[:-1])
 
-temp = []
-idx = words[0][0]
-while(idx != 0):
-  for i in range(num):
-    letter = words[i][1][words[i][0] - idx]
-    if(letter not in temp):
-      temp.append(letter)
-    if(len(words[i + 1][1]) < idx):
-      break
-  idx -= 1
+temp = {}
+for word in words:
+  for i in range(len(word)):
+    if(word[i] in temp):
+      temp[word[i]] += 10**(len(word) - 1 - i)
+    else:
+      temp[word[i]] = 10**(len(word) - 1 - i)
+
+keys = list(temp.keys())
+for i in range(len(keys)):
+  keys[i] = temp[keys[i]]
+keys.sort(reverse = True)
 
 result = 0
-for i in range(num):
-  digit = len(words[i][1])
-  for j in range(len(words[i][1])):
-
-    result += (9 - temp.index(words[i][1][j])) * 10**(digit - 1 - j)
+for i in range(len(keys)):
+  result += keys[i] * (9 - i)
 
 print(result)

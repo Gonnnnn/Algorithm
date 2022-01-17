@@ -1,6 +1,7 @@
-a = 1
-b = [[1]]
-for i in range(a-2, a):
-  print(b[i][0])
+import heapq as hq
 
-b[-1][0]
+a = [[4,3], [1,4], [1,3]]
+hq.heapify(a)
+
+for i in range(len(a)):
+  print(hq.heappop(a))
