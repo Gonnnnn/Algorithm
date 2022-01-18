@@ -18,6 +18,7 @@
 # 첫째 줄에 상덕이가 훔칠 수 있는 보석 가격의 합의 최댓값을 출력한다.
 
 import sys
+import heapq as hq
 
 input = sys.stdin.readline
 
@@ -25,19 +26,27 @@ n, k = map(int, input().split())
 
 jewels = []
 for i in range(n):
-  jewels.append(list(map(int, input().split())))
+  weight, value = map(int, input().split())
+  jewels.append([weight, -value])
 
 bags = []
 for i in range(k):
   bags.append(int(input()))
 
-jewels.sort(key = lambda x:x[1], reverse = True)
+hq.heapify(jewels)
 bags.sort()
 
-temp_bag = []
+temp = []
 result = 0
-for i in range(n):
-  for j in range(len(bags)):
-    if()
+for bag in bags:
+  
+  while(jewels and bag >= jewels[0][0]):
+    jewel = hq.heappop(jewels)
+    hq.heappush(temp, jewel[1])
+
+  if(temp):
+    result -= hq.heappop(temp)
+  elif(not jewels):
+    break
 
 print(result)
