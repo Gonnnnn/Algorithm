@@ -118,6 +118,8 @@ max_result = max(12, 4324, 232)
 wow = eval("(3+5)*7")
 hmm = [('a', 12), ('b', 13), ('c', 1)]
 sorted_result = sorted(hmm, key=lambda x:x[1], reverse=True)
+oohsodfhosdf = "".join(['a', 'b', 'c'])
+
 
 # itertools - 순열(Permutations) 조합(combinations. 모든 경우를 고려해야하는 경우. 완전탐색문제
 # 먼저 순열 조합 공식으로 계산해봐서 경우의수가 어느정도가 되는지 생각해보고 쓸지 안쓸지 생각해봐야지

@@ -1,7 +1,4 @@
-import heapq as hq
-
-a = [[4,3], [1,4], [1,3]]
-hq.heapify(a)
-
-for i in range(len(a)):
-  print(hq.heappop(a))
+import sys
+input = sys.stdin.readline
+doc = input().strip()
+word = input().strip()
