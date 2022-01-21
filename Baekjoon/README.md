@@ -77,3 +77,6 @@ arrays can be compared through != and ==
 
 #### 1715
 - heapq : heaq.heapify(list) - O(N), heapq.heappop(heapified list) - O(logn), heapq.heappush(heapified list, value) - O(logn)
+
+## Dynamic Programming
+### Idea
