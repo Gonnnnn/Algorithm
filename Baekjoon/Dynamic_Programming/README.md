@@ -8,6 +8,9 @@
 
 
 ### Idea
+#### 9095
+- 일단 차례대로 전개해보며 규칙을 살펴보는 것도 좋다.
+
 
 ### Python modules that i wasn't really familiar with
 #### 1003
