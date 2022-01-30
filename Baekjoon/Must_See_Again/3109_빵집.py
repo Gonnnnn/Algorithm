@@ -21,13 +21,34 @@
 # 출력
 # 첫째 줄에 원웅이가 놓을 수 있는 파이프라인의 최대 개수를 출력한다.
 
+
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# code 정리를 나중에 다시해보자. 까먹었을때쯤! (22/1/30에 첫 풀이)
+# DFS 함수 내에 if문으로 케이스 다 나누는게 for문 넣어서 푸는 것보다 빨랐다.
+# 이유도 생각해보자. 다른 풀이들을 보니 for문을 넣었는데 느리지 않다.
+# TC 확인
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+# ######################################################
+
 import sys
 input = sys.stdin.readline
 R, C = map(int, input().split())
 graph = [list(input().strip()) for _ in range(R)]
 
-visited = [[] for _ in range(R)]
 
+# visited를 굳이 쓸 필요 없었다
+visited = [[] for _ in range(R)]
 for i in range(R):
   for j in range(C):
     if graph[i][j] == '.':
@@ -39,6 +60,7 @@ for i in range(R):
 # v_c is the index of the column where v is
 count = 0
 reached_the_end = False
+dx = [-1, 0 ,1]
 def DFS(graph, visited, v_r, v_c):
   global count
   global reached_the_end
@@ -46,36 +68,18 @@ def DFS(graph, visited, v_r, v_c):
   if(visited[v_r][v_c]):
     return
 
+  visited[v_r][v_c] = True
+
   if(v_c == C-1):
-    visited[v_r][v_c] = True
     count += 1
     reached_the_end = True
     return
 
-  if(v_r == 0):
-    for i in range(0, 2):
-      if(not visited[v_r+i][v_c+1]):
-        DFS(graph, visited, v_r+i, v_c+1)
-        if(reached_the_end):
-          visited[v_r][v_c] = True
-          return
-
-  elif(v_r == R-1):
-    for i in range(-1, 1):
-      if(not visited[v_r+i][v_c+1]):
-        DFS(graph, visited, v_r+i, v_c+1)
-        if(reached_the_end):
-          visited[v_r][v_c] = True
-          return
-
-  else:
-    for i in range(-1, 2):
-      if(not visited[v_r+i][v_c+1]):
-        DFS(graph, visited, v_r+i, v_c+1)
-        if(reached_the_end):
-          visited[v_r][v_c] = True
-          return
-
+  for x in dx:
+    if(0<=v_r+x<R and not visited[v_r+x][v_c+1]):
+      DFS(graph, visited, v_r+x, v_c+1)
+      if(reached_the_end):
+        return
 
 for v_r in range(R):
   DFS(graph, visited, v_r, 0)
