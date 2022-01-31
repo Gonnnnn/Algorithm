@@ -28,6 +28,8 @@ dict.keys(), dict.values(), dict(items) --> iterable. can be used for a for loop
 - 두개의 변수가 있을 때 하나를 고정하고, 그에 적합한 것을 찾아보고, 그 반대로 다른 하나를 고정 후 우너래 고정했던 것을 변경하며 그에 적합한 것을 찾아가보자  
 - 가장 가치가 높은 보석을 선택 후 그에 맞는 최선의 가방을 찾기 vs 가장 큰 or 작은 가방을 선택 후 그에 맞는 최선의 보석 찾기
 
+#### 1213
+- alphabet과 같이 한정된 경우의 수가 있고, 그게 26가지 정도로 작을 때, 배열을 임의로 만들고 각 알파벳 index에 맞게 카운트 해주기만 하면 공간을 덜 잡아먹을 수 있겠다.
 
 ### Python modules that i wasn't really familiar with
 
