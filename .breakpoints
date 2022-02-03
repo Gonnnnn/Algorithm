@@ -1,5 +1,13 @@
 {
   "files": {
+    "Baekjoon/Dynamic_Programming/2193_이친수.py": [
+      {
+        "id": "9ceac757-5aa8-4086-9688-4f4c759ffaa0",
+        "line": 1,
+        "version": 0,
+        "index": 0
+      }
+    ],
     "Baekjoon/Graph_Traversal/1260_DFS와BFS.py": [
       {
         "id": "3d8a4227-7c69-4a0e-ac3e-17bac0b8419a",
