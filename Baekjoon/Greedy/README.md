@@ -31,6 +31,9 @@ dict.keys(), dict.values(), dict(items) --> iterable. can be used for a for loop
 #### 1213
 - alphabet과 같이 한정된 경우의 수가 있고, 그게 26가지 정도로 작을 때, 배열을 임의로 만들고 각 알파벳 index에 맞게 카운트 해주기만 하면 공간을 덜 잡아먹을 수 있겠다.
 
+#### 2212
+- 물론 특정 기준을 잡고 그 것을 만족하지 못할 때 케이스들을 제외하는 경우도 있겠지만, 그리디의 경우 대부분 기준 자체가 항상 일정하게 있다기 보다는, 전체적으로 봤을 때 가장 안좋은 것들을 하나씩 제외해 나가는 경우가 많은 것 같다.
+
 ### Python modules that i wasn't really familiar with
 
 #### 11047

@@ -11,6 +11,8 @@
 #### 9095
 - 일단 차례대로 전개해보며 규칙을 살펴보는 것도 좋다.
 
+#### 9461
+- 재귀함수와 for문 모두 구현해보는 식으로 연습하면 더 좋겠다.
 
 ### Python modules that i wasn't really familiar with
 #### 1003
