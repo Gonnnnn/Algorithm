@@ -1,2 +1,3 @@
-a = [0]
-print(a[-1])
+a = '1212123'
+a = a.replace('12', '5')
+print(a)

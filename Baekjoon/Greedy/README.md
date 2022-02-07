@@ -86,3 +86,7 @@ arrays can be compared through != and ==
 
 #### 1715
 - heapq : heaq.heapify(list) - O(N), heapq.heappop(heapified list) - O(logn), heapq.heappush(heapified list, value) - O(logn)
+
+#### 1343
+- replace : string = string.replace('character to change', 'character to change the previous one to')  
+- 0번째 idx부터 해당 character을 찾아 교체하고, 남은 character들을 기준으로 다시 반복한다.
