@@ -30,3 +30,23 @@ for _ in range(T):
         DP[i][j] = DP[i][j-1] + DP[i-1][j-1]
 
     print(DP[N][M])
+
+# 피보나치 수열을 이용해 combination으로 푼 풀이
+# import sys
+# input = sys.stdin.readline
+
+# f = [1] * 31
+# for i in range(1, 31):
+#     f[i] = f[i-1] * i
+
+# for _ in range(int(input())):
+#     n, m = map(int, input().split())
+#     print(int(f[m] / (f[m-n]*f[n])))
+
+# combination을 이용한 풀이
+# import sys
+# import math
+# N = int(sys.stdin.readline())
+# for i in range(N):
+#     b,a = map(int,sys.stdin.readline().split())
+#     print(math.comb(a,b))

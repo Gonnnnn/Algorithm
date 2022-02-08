@@ -89,4 +89,8 @@ arrays can be compared through != and ==
 
 #### 1343
 - replace : string = string.replace('character to change', 'character to change the previous one to')  
-- 0번째 idx부터 해당 character을 찾아 교체하고, 남은 character들을 기준으로 다시 반복한다.
+- 0번째 idx부터 해당 character을 찾아 교체하고, 남은 character들을 기준으로 다시 반복한다.  
+
+#### 12904
+- list[::-1] - 뒤집기
+- 구현과정 중, 마지막 알파벳이 B이면 리스트를 뒤집어야하는 부분이 있었다. deque를 이용해서 popleft하는편이 list를 계속해서 뒤집는 것보다 효율적일 것이라고 생각해, deque를 사용했지만, list[::-1]를 사용한 사람들보다 실행시간이 조금 더 오래걸렸다. 여러 이유가 있을 수 있겠지만, 일단 저 방법도 알아두자. TC만 따져보면 popleft()하는 편이 훨씬 빠를 수 밖에 없다. 아마 list -> deque 객체 생성 과정에서 시간이 좀 걸릴 수도 있고,,
