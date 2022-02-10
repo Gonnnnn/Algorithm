@@ -1,5 +1,13 @@
 {
   "files": {
+    ".replit": [
+      {
+        "id": "9515e9e9-76ef-4d2e-876c-07b53c36258a",
+        "line": 2,
+        "version": 10,
+        "index": 21
+      }
+    ],
     "Baekjoon/Dynamic_Programming/2193_이친수.py": [
       {
         "id": "9ceac757-5aa8-4086-9688-4f4c759ffaa0",
