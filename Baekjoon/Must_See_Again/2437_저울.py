@@ -14,24 +14,30 @@
 # 출력
 # 첫째 줄에 주어진 추들로 측정할 수 없는 양의 정수 무게 중 최솟값을 출력한다.
 
-import sys
-
-input = sys.stdin.readline
-
 N = int(input())
 weights = list(map(int, input().split()))
 weights.sort()
-weights.append(1e9 + 1)
-temp = 0
-if(weights[0] == 1):
-  for i in range(len(weights)):
-      temp += weights[i]
-      if (temp < weights[i + 1] - 1):
-          break
+result = 0
 
-  print(temp + 1)
-else:
-  print(1)
+for weight in weights:
+  if weight > result + 1:
+    break
+  result += weight
+print(result + 1)
+
+
+
+# weights.append(1e9 + 1)
+# temp = 0
+# if(weights[0] == 1):
+#   for i in range(len(weights)):
+#       temp += weights[i]
+#       if (temp < weights[i + 1] - 1):
+#           break
+
+#   print(temp + 1)
+# else:
+#   print(1)
 
 # it could be
 # temp = 1

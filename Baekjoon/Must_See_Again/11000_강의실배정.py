@@ -20,10 +20,7 @@ import heapq
 input = sys.stdin.readline
 
 N = int(input())
-lectures = []
-for _ in range(N):
-  start, end = map(int, input().split())
-  lectures.append((start, end))
+lectures = [list(map(int, input().split())) for _ in range(N)]
 lectures.sort()
 
 rooms = []

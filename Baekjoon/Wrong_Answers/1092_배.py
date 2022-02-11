@@ -9,36 +9,37 @@
 # 출력
 # 첫째 줄에 모든 박스를 배로 옮기는데 드는 시간의 최솟값을 출력한다. 만약 모든 박스를 배로 옮길 수 없으면 -1을 출력한다.
 
-import heapq as hq
-
 N = int(input())
-limit = list(map(int, input().split()))
+cranes = list(map(int, input().split()))
 M = int(input())
-weights = list(map(int, input().split()))
-limit.sort(reverse=True)
-for i in range(len(weights)):
-  weights[i] *= -1
-hq.heapify(weights)
+boxes = list(map(int, input().split()))
+cranes.sort()
+boxes.sort()
 
-if -1 * weights[0] > limit[0]:
-  print(-1)
-else:
+# 크레인이 2 2 2 2 10
+# 박스가 2 2 2 2  2 2 2 2   10 10과 같은 경우 최소 시간을 구하지 못한다.
+if cranes[-1] >= boxes[-1]:
+  # 남은 박스들을 옮길 수 있는 크레인들 중 가장 무게 제한이 낮은 크레인
+  idx_crane = 0
+  # 옮겨야 할 박스
+  idx_box = 0
   result = 0
-  while(weights):
-    idx = 0
-    bag = []
-    while(weights):
-      weight = hq.heappop(weights)
-      if -1 * weight <= limit[idx]:
-        idx += 1
-        if idx == len(limit):
-          break
-      else:
-        bag.append(weight)
+  while(len(boxes) > idx_box):
+    boxes_to_move = 0
+    for i in range(idx_crane, len(cranes)):
+      if cranes[i] >= boxes[idx_box]:
+        idx_crane = i
+        break
+    j = idx_crane
 
-    weights = weights + bag
-    hq.heapify(weights)
+    while(boxes_to_move < len(cranes[idx_crane:]) and len(boxes) > idx_box and j < len(cranes)):
+      if boxes[idx_box] <= cranes[j]:
+        boxes_to_move += 1
+        idx_box += 1
+      j += 1
 
-    result += 1
+    result += 1    
 
   print(result)
+else:
+  print(-1)
