@@ -20,54 +20,39 @@
 
 
 # 꼭 다시 풀어보자! 이거 문제가 낫밷
-import sys
-import heapq as hq
-input = sys.stdin.readline
-
 N, K = map(int, input().split())
-times = [0] * (K+1)
-temp_list = list(map(int, input().split()))
+appliances = list(map(int, input().split()))
 
-devices = [temp_list[0]]
-times[temp_list[0]] += 1
-for i in range(1, len(temp_list)):
-  if (temp_list[i] != temp_list[i-1]):
-    # 각 상품마다 사용하는 횟수 기록
-    times[temp_list[i]] += 1
-    # 연속해서 사용하는 물품들은 한번으로 묶어주기
-    devices.append(temp_list[i])
+appliances.append(appliances[-1]+1)
+# 연속해서 등장하는 경우는 한번으로 생각한다.
+processed = []
+for i in range(len(appliances) - 1):
+  if appliances[i] != appliances[i+1]:
+    processed.append(appliances[i])
 
-times[devices[0]] -= 1
-plugged = [[times[devices[0]], devices[0]]]
-count = 0
-
-for i in range(1, len(devices)):
-  temp = [times[devices[i]], devices[i]]
-  if temp in plugged:
-    bags = []
-    for j in range(len(plugged)):
-      bag = hq.heappop(plugged)
-      if bag[1] == temp[1]:
-        break
-      else:
-        bags.append(bag)
-    for k in range(len(bags)):
-      hq.heappush(plugged, bags[k])
-    times[devices[i]] -= 1
-    temp[0] -= 1
-    hq.heappush(plugged, temp)    
+table = {}
+for i in processed:
+  if i not in table:
+    table[i] = 1
   else:
-    times[devices[i]] -= 1
-    temp[0] -= 1 
-    if len(plugged) < N:
-      hq.heappush(plugged, temp)
-    else:
-      hq.heappop(plugged)
-      hq.heappush(plugged, temp)
+    table[i] += 1
+
+socket = []
+count = 0
+for appliance in processed:
+  if len(socket) < N:
+    socket.append(appliance)
+  else:
+    if appliance not in socket:
+      Min = 101
+      idx = 0
+      for i in range(len(socket)):
+        key = socket[i]
+        if Min > table[key]:
+          Min = table[key]
+          idx = i
+      socket[idx] = appliance
       count += 1
-
+  table[appliance] -= 1
+      
 print(count)
-
-
-
-

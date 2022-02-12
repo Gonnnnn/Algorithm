@@ -1,12 +1,32 @@
 # Greedy Algorithm
 ### We use Greedy methods when
-- Greedy Choice Property : 앞의 선택이 이후의 선택에 영향을 주지 않는다.
+- Greedy Choice Property : 앞의 선택이 이후의 선택에 영향을 주지 않는다.  
+무슨 소리인지 이해가 안갈 것이다. 설명이 불친절해쳐먹어서 그렇다!  
+*쉽게 말하면, 논리가 바뀌지 않는다는 것이다.*  
+ 앞의 선택을 하는데 있어서 적용한 논리가 있을 것이다. 이때, 앞의 선택은 이후 선택들에 대해서도 선택을 위해 적용하는 논리에 영향을 미치지 않는다는 것이다. 대표적인 동전 거스름돈 문제를 예로들자. 애초에 최소 갯수의 동전을 주기 위해서는 줄 수 있는 가장 가치가 큰 동전으로 최대한 돈을 거슬러줘야하고, 그 후 남은 돈에 대해서도 같은 과정을 반복해야한다! 
 - Optimal Substructure : 문제에 대한 최종 해결 방법은 부분 문제에 대한 최적 문제 해결 방법으로 구성된다.
 - 위의 조건이 성립하지 않는 경우 최적해를 구할 수 없다.
 ### Procedure
 - 선택 절차(Selection Procedure): 현재 상태에서의 최적의 해답을 선택한다.
 - 적절성 검사(Feasibility Check): 선택된 해가 문제의 조건을 만족하는지 검사한다.
-- 해답 검사(Solution Check): 원래의 문제가 해결되었는지 검사하고, 해결되지 않았다면 선택 절차로 돌아가 위의 과정을 반복한다.
+- 해답 검사(Solution Check): 원래의 문제가 해결되었는지 검사하고, 해결되지 않았다면 선택 절차로 돌아가 위의 과정을 반복한다.  
+
+<pre>
+  <code>
+  while (there are more coins and the instance is not solved) {
+  Grab the largest remaining coin;	// 선정과정
+    
+    if ( adding the coin makes the change exceed the amount owed){
+      reject the coin;			// 적정성 점검
+    }
+    else
+      add the coin to the change;
+    
+    if ( the total value of the change equals the amount owed )
+      the instance is solved;			// 해답 점검
+  }
+  </code>
+</pre>
 
 Ref : https://hanamon.kr/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%ED%83%90%EC%9A%95%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-greedy-algorithm/
 
