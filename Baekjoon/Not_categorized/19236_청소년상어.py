@@ -1,11 +1,3 @@
-
-# 물고기 클래스 생성
-# 클래스 변수 : 방향과 숫자, 상어OR물고기
-# 함수 : Move, scan
-
-# 전체 TABLE도 생성
-# 
-
 import copy
 
 class Fish:
@@ -15,34 +7,44 @@ class Fish:
     self.location = location
     self.fish = True
   
-def fish_move(one, Map):
+def fish_move(one, Map, fish_li):
   dxdy = [[-1, 0],[-1, -1], [0, -1], [1, -1],
       [1, 0], [1, 1], [0, 1], [-1, 1]]
 
-  for i in range(1, len(dxdy)):
-    if one == None:
+  for i in range(0, len(dxdy)):
+    location_x = one.location[0] + dxdy[(one.direction-1+i)%8][0]
+    location_y = one.location[1] + dxdy[(one.direction-1+i)%8][1]
+
+    # 맵을 벗어나면 이동하지 못한다
+    if location_x >= 4 or location_x < 0 or location_y >= 4 or location_y < 0:
       continue
     else:
-      location_x = one.location[0] + dxdy[(one.direction-1+i)%8][0]
-      location_y = one.location[1] + dxdy[(one.direction-1+i)%8][1]
+      # cell이 비어있으면 거기로 바로 이동한다. 다른 물고기의 location을 갱신할 필요가 없다.
+      if Map[location_x][location_y] == None:
+        one.direction = (one.direction-1+i)%8 + 1
 
-      if location_x >= 4 or location_y >= 4:
-        continue
-      elif Map[location_x][location_y] == None:
-        one.location[0], one.location[1] = location_x, location_y
-        one.direction = (one.direction-1+i)%8
-      elif fish_li[Map[location_x][location_y]] != None and not fish_li[Map[location_x][location_y]].fish:
-        continue
-      else:
-        other_fish = fish_li[Map[location_x][location_y]]
         Map[location_x][location_y] = one.order
-        Map[one.location[0]][one.location[1]] = other_fish.order
+        Map[one.location[0]][one.location[1]] = None
+        one.location = [location_x, location_y]
+        break
+      # 비어있지 않다면 물고기 혹은 상어가 있다.
+      else:
+        # 상어가 있는 경우, 이동하지 못하므로 넘어간다.
+        if not fish_li[Map[location_x][location_y]].fish:
+          continue
+        # 물고기가 있으니 Map상에서 물고기를 교환해주고, 물고기 자체의 정보도 update해준다
+        else:
+          other_fish = fish_li[Map[location_x][location_y]]
+          # Map상에서 물고기 위치를 교환해준다
+          Map[location_x][location_y] = one.order
+          Map[one.location[0]][one.location[1]] = other_fish.order
 
-        temp_x, temp_y = other_fish.location[0], other_fish.location[1]
-        other_fish.location[0], other_fish.location[0] = location_x, location_y
-        one.location[0] = temp_x
-        one.location[1] = temp_y
-        one.direction = (one.direction-1+i)%8
+          # 물고기들의 정보를 update해준다
+          other_fish.location = [one.location[0], one.location[1]]
+          one.location[0] = location_x
+          one.location[1] = location_y
+          one.direction = (one.direction-1+i)%8 + 1
+          break
 
 
 class Shark:
@@ -53,7 +55,7 @@ class Shark:
     self.location = location
     self.fish = False
   
-  def move(self, count):
+  def point_to_move_to(self, count):
     dxdy = [[-1, 0],[-1, -1], [0, -1], [1, -1],
         [1, 0], [1, 1], [0, 1], [-1, 1]]
     location_x = self.location[0] + dxdy[self.direction-1][0] * count
@@ -74,7 +76,7 @@ def shark_scan(one, Map):
     location_y += dxdy[one.direction-1][1]
     count += 1
 
-    if location_x >= 4 or location_y >= 4:
+    if location_x >= 4 or location_x < 0 or location_y >= 4 or location_y < 0:
       break
     elif Map[location_x][location_y] == None:
       continue
@@ -87,10 +89,9 @@ def shark_scan(one, Map):
 def shark_eat(one, Map, fish_li, what_to_eat):
   fish_to_eat = fish_li[Map[what_to_eat[0]][what_to_eat[1]]]
   fish_li[fish_to_eat.order] = None
-
+  
   one.have_eaten += fish_to_eat.order
   one.direction = fish_to_eat.direction
-  
   Map[one.location[0]][one.location[1]] = None
   one.location = fish_to_eat.location
 
@@ -105,37 +106,41 @@ for i in range(4):
     fish_li[temp[j]] = Fish(temp[j], temp[j+1], [i, j//2])
     Map[i][j//2] = temp[j]
 
-shark = Shark(fish_li[Map[0][0]].order, fish_li[Map[0][0]].direction, fish_li[Map[0][0]].location)
+first_fish = fish_li[Map[0][0]]
+shark = Shark(first_fish.order, first_fish.direction, first_fish.location)
 fish_li[0] = shark
+fish_li[first_fish.order] = None
 Map[0][0] = shark.order
 
 answer = 0
-def go(Map, fish_li, shark, result):
+def go(Map, fish_li, shark, result, order):
   global answer
 
   Map_save = copy.deepcopy(Map)
   fish_li_save = copy.deepcopy(fish_li)
-  
   for i in range(1,len(fish_li_save)):
-    fish_move(fish_li_save[i], Map_save)
-  
+    one = fish_li_save[i]
+    if one != None:
+      fish_move(one, Map_save, fish_li_save)
+
+
   possible_cells = shark_scan(shark, Map_save)
   if len(possible_cells) == 0:
     answer = max(result, answer)
     return
   
+
   for i in possible_cells:
+    new_shark = copy.deepcopy(shark)
     Map_to_hand_to_next = copy.deepcopy(Map_save)
     fish_li_to_hand_to_next = copy.deepcopy(fish_li_save)
-    new_location = shark.move(i)
-    new_shark = Shark(shark.have_eaten, shark.direction, shark.location)
-
+    new_location = new_shark.point_to_move_to(i)
     shark_eat(new_shark, Map_to_hand_to_next, fish_li_to_hand_to_next, new_location)
 
-    go(Map_to_hand_to_next, fish_li_to_hand_to_next, new_shark, new_shark.have_eaten)
+    go(Map_to_hand_to_next, fish_li_to_hand_to_next, new_shark, new_shark.have_eaten, order+1)
 
   
-go(Map, fish_li, shark, shark.have_eaten)
+go(Map, fish_li, shark, shark.have_eaten, 1)
 
 print(answer)
 
