@@ -1,3 +1,7 @@
+# https://www.acmicpc.net/source/38243117
+# https://www.acmicpc.net/source/37305513
+# 좀 깔끔해보이는 코드들
+
 import copy
 
 class Fish:
