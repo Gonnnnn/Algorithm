@@ -58,6 +58,9 @@ dict.keys(), dict.values(), dict(items) --> iterable. can be used for a for loop
 #### 2212
 - 물론 특정 기준을 잡고 그 것을 만족하지 못할 때 케이스들을 제외하는 경우도 있겠지만, 그리디의 경우 대부분 기준 자체가 항상 일정하게 있다기 보다는, 전체적으로 봤을 때 가장 안좋은 것들을 하나씩 제외해 나가는 경우가 많은 것 같다.
 
+#### 11501
+- 아무리 생각해도 TC가 적절한데 안되는거면 거꾸로 탐색(for문 돌리기 등)을 했을 때 더 효율적일 수 있는가 생각하자. 그럴 경우 필요 없는 과정들이 지워질 수 있다.
+
 ### Python modules that i wasn't really familiar with
 
 #### 11047
