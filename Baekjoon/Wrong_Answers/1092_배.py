@@ -11,35 +11,30 @@
 
 N = int(input())
 cranes = list(map(int, input().split()))
+cranes.sort()
 M = int(input())
 boxes = list(map(int, input().split()))
-cranes.sort()
 boxes.sort()
 
-# 크레인이 2 2 2 2 10
-# 박스가 2 2 2 2  2 2 2 2   10 10과 같은 경우 최소 시간을 구하지 못한다.
-if cranes[-1] >= boxes[-1]:
-  # 남은 박스들을 옮길 수 있는 크레인들 중 가장 무게 제한이 낮은 크레인
-  idx_crane = 0
-  # 옮겨야 할 박스
-  idx_box = 0
-  result = 0
-  while(len(boxes) > idx_box):
-    boxes_to_move = 0
-    for i in range(idx_crane, len(cranes)):
-      if cranes[i] >= boxes[idx_box]:
-        idx_crane = i
-        break
-    j = idx_crane
-
-    while(boxes_to_move < len(cranes[idx_crane:]) and len(boxes) > idx_box and j < len(cranes)):
-      if boxes[idx_box] <= cranes[j]:
-        boxes_to_move += 1
-        idx_box += 1
-      j += 1
-
-    result += 1    
-
-  print(result)
-else:
+if boxes[-1] > cranes[-1]:
   print(-1)
+else:
+  result = 0
+  box_idx = 0
+  while(box_idx < M):
+    boxes_to_move = 0
+    available_cranes = N
+    for crane in cranes:
+      if box_idx >= M or boxes_to_move >= N or available_cranes <= 0:
+        break
+      if crane >= boxes[box_idx]:      
+        while(box_idx < M and boxes_to_move < N and available_cranes > 0):
+          available_cranes -= 1
+          boxes_to_move += 1
+          box_idx += 1
+      else:
+        available_cranes -= 1
+  
+    result += 1
+      
+  print(result)
