@@ -1,4 +1,4 @@
-import sys
+dimport sys
 import heapq as hq
 
 input = sys.stdin.readline
