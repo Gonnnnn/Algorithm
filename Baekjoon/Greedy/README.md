@@ -66,6 +66,9 @@ dict.keys(), dict.values(), dict(items) --> iterable. can be used for a for loop
 #### 11501
 - 아무리 생각해도 TC가 적절한데 안되는거면 거꾸로 탐색(for문 돌리기 등)을 했을 때 더 효율적일 수 있는가 생각하자. 그럴 경우 필요 없는 과정들이 지워질 수 있다.
 
+#### 2457
+- 월/일로 표기되는 날짜의 대소를 비교할 때, 월에 100을 곱해 일을 더해줘서 비교하면 너무 편하다.
+
 ### Python modules that i wasn't really familiar with
 
 #### 11047
