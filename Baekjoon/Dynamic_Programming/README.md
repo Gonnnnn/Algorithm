@@ -29,6 +29,9 @@
 #### 9461
 - 재귀함수와 for문 모두 구현해보는 식으로 연습하면 더 좋겠다.
 
+#### 2294
+- 전형적인 DP
+
 ### Python modules that i wasn't really familiar with
 #### 1003
 - 2차원 list * number을 했을 때 같은 주소를 갖는 list들이 복사될 뿐이다. a = [[0, 0] for _ in range(number)]로 해야한다!!!!
