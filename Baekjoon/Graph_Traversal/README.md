@@ -15,5 +15,8 @@
 - 또 recursion error가 무지성으로 뜨면 그냥 답을 확인하자. 제대로 했는데도 뜨는 경우가 있네.
 
 ### Idea
+2667
+- DFS에서 stack에 쌓이는 타겟 노드들은 중복될 수 있다. 앞에서 방문했으면 뒤에서는 방문할 필요가 없다! 이를 위해선 항상 이를 확인하는 if문을 앞에 넣는 것을 잊지 말자.
+- 무언가를 count할 때, 위와 같이 중복이 될 수 있기 때문에 DFS로 탐색하기 전에 count하면 안되고, count해본 후, 방문해보지 않은 경우라면 count해야한다.
 
 ### Python modules that i wasn't really familiar with
