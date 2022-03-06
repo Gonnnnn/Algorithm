@@ -7,7 +7,7 @@ table.sort()
 DP = [0]*N
 for i in range(N):
   temp = 0
-  for j in range(0, i):
+  for j in range(i):
     if table[j][1] < table[i][1]:
       if temp < DP[j]:
         temp = DP[j]
