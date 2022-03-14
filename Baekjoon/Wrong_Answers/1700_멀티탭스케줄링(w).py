@@ -1,58 +1,37 @@
-# 문제
-# 기숙사에서 살고 있는 준규는 한 개의 멀티탭을 이용하고 있다. 준규는 키보드, 헤어드라이기, 핸드폰 충전기, 디지털 카메라 충전기 등 여러 개의 전기용품을 사용하면서 어쩔 수 없이 각종 전기용품의 플러그를 뺐다 꽂았다 하는 불편함을 겪고 있다. 그래서 준규는 자신의 생활 패턴을 분석하여, 자기가 사용하고 있는 전기용품의 사용순서를 알아내었고, 이를 기반으로 플러그를 빼는 횟수를 최소화하는 방법을 고안하여 보다 쾌적한 생활환경을 만들려고 한다.
+from collections import Counter
 
-# 예를 들어 3 구(구멍이 세 개 달린) 멀티탭을 쓸 때, 전기용품의 사용 순서가 아래와 같이 주어진다면, 
-
-# 키보드
-# 헤어드라이기
-# 핸드폰 충전기
-# 디지털 카메라 충전기
-# 키보드
-# 헤어드라이기
-# 키보드, 헤어드라이기, 핸드폰 충전기의 플러그를 순서대로 멀티탭에 꽂은 다음 디지털 카메라 충전기 플러그를 꽂기 전에 핸드폰충전기 플러그를 빼는 것이 최적일 것이므로 플러그는 한 번만 빼면 된다. 
-
-# 입력
-# 첫 줄에는 멀티탭 구멍의 개수 N (1 ≤ N ≤ 100)과 전기 용품의 총 사용횟수 K (1 ≤ K ≤ 100)가 정수로 주어진다. 두 번째 줄에는 전기용품의 이름이 K 이하의 자연수로 사용 순서대로 주어진다. 각 줄의 모든 정수 사이는 공백문자로 구분되어 있다. 
-
-# 출력
-# 하나씩 플러그를 빼는 최소의 횟수를 출력하시오.
-
-
-
-# 꼭 다시 풀어보자! 이거 문제가 낫밷
+# 멀티탭 구멍 수, 전기 용품의 총 사용횟수
 N, K = map(int, input().split())
-appliances = list(map(int, input().split()))
+devices = list(map(int, input().split()))
 
-appliances.append(appliances[-1]+1)
-# 연속해서 등장하는 경우는 한번으로 생각한다.
-processed = []
-for i in range(len(appliances) - 1):
-  if appliances[i] != appliances[i+1]:
-    processed.append(appliances[i])
+counts = Counter(devices)
+# counts = [0]*(K+1)
+# for device in devices:
+#   counts[device] += 1
 
-table = {}
-for i in processed:
-  if i not in table:
-    table[i] = 1
+outlet = {}
+result = 0
+for i, device in enumerate(devices):
+  counts[device] -= 1
+  if len(outlet) < N:
+    outlet[device] = counts[device]
   else:
-    table[i] += 1
+    if device in outlet:
+      outlet[device] -= 1
+    else:
+      idx = -1
+      key = -1
+      devices_copy = devices[i+1:]
+      for temp_key in outlet:
+        if counts[temp_key] == 0:
+          key = temp_key
+          break
+        temp_idx = devices_copy.index(temp_key)
+        if idx < temp_idx:
+          idx = temp_idx
+          key = temp_key
 
-socket = []
-count = 0
-for appliance in processed:
-  if len(socket) < N:
-    socket.append(appliance)
-  else:
-    if appliance not in socket:
-      Min = 101
-      idx = 0
-      for i in range(len(socket)):
-        key = socket[i]
-        if Min > table[key]:
-          Min = table[key]
-          idx = i
-      socket[idx] = appliance
-      count += 1
-  table[appliance] -= 1
-      
-print(count)
+      del outlet[key]
+      outlet[device] = counts[device]
+      result += 1
+print(result)
