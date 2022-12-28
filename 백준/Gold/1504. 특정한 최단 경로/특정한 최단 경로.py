@@ -7,8 +7,6 @@ def dijk(start):
     pq = [(0, start)]
     while(pq):
         weight, node = heapq.heappop(pq)
-        if d[node] < weight: continue
-        
         for neighborWeight, neighbor in table[node]:
             newWeight = weight + neighborWeight
             if d[neighbor] <= newWeight: continue
